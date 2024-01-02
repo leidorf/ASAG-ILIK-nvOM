@@ -1,0 +1,15 @@
+﻿@page
+@model ASAG_ILIK_nvOM.Pages.Home.IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Hoşgeldiniz, @User.Identity.Name!</h1>
+
+    <p>Kullanıcı sayfanıza hoş geldiniz. İşlemlerinizi buradan gerçekleştirebilirsiniz.</p>
+
+    <!-- İlanları görüntüleme veya başka seçenekler ekleyebilirsiniz -->
+    <a asp-page="/Announcements/Index" class="btn btn-success">İlanları Görüntüle</a>
+</div>
+    

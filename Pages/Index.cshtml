@@ -1,0 +1,14 @@
+﻿@page
+@model ASAG_ILIK_nvOM.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="text-center">
+    <h1 class="display-4">BTK ASAG-ILIK nvOM'e hoşgeldiniz!</h1>
+    <p>Kayıt olmadıysanız kayıt olabilir, eğer kayıt olduysanız giriş yapabilirsiniz.</p>
+    <div>
+        <a asp-page="/Register/Index" class="btn btn-primary">Kayıt Ol</a>
+        <a asp-page="/Login/Index" class="btn btn-warning">Giriş Yap</a>
+    </div>
+</div>

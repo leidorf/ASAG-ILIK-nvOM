@@ -1,0 +1,19 @@
+﻿@page
+@model ASAG_ILIK_nvOM.Pages.Announcements.IndexModel
+@{
+    ViewData["Title"] = "Announcements";
+}
+
+<div class="text-center">
+    <h1 class="display-4">İlanlar</h1>
+
+    <!-- İlanları listeleyebilirsiniz -->
+    <ul>
+        @foreach (var announcement in Model.Announcements)
+        {
+            <li>@announcement.Title - @announcement.Description</li>
+        }
+    </ul>
+
+    <p><a asp-page="/Home/Index">Ana Sayfa'ya Geri Dön</a></p>
+</div>
