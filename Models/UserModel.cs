@@ -5,7 +5,6 @@ namespace ASAG_ILIK_nvOM.Models
 {
     public class UserModel
     {
-
         [Key]
         public int UserId { get; set; }
 
@@ -17,7 +16,8 @@ namespace ASAG_ILIK_nvOM.Models
 
         [Required]
         public bool IsEmployer { get; set; }
+        public decimal Balance { get; set; }
 
-        public ICollection<AnnouncementModel>? Announcements { get; set; }
+
     }
 }

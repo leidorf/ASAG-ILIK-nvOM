@@ -29,26 +29,30 @@ namespace ASAG_ILIK_nvOM.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AnnouncementId"));
 
-                    b.Property<decimal>("Balance")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("AcceptedByUserId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18, 2)");
+
                     b.Property<DateTime>("PublishDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("PublishedByUserId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("AnnouncementId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Announcements");
                 });
@@ -60,6 +64,9 @@ namespace ASAG_ILIK_nvOM.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
+
+                    b.Property<decimal>("Balance")
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<bool>("IsEmployer")
                         .HasColumnType("bit");
@@ -75,22 +82,6 @@ namespace ASAG_ILIK_nvOM.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("ASAG_ILIK_nvOM.Models.AnnouncementModel", b =>
-                {
-                    b.HasOne("ASAG_ILIK_nvOM.Models.UserModel", "User")
-                        .WithMany("Announcements")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("ASAG_ILIK_nvOM.Models.UserModel", b =>
-                {
-                    b.Navigation("Announcements");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,4 +1,5 @@
 // Pages/Home/Index.cshtml.cs
+using ASAG_ILIK_nvOM.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ASAG_ILIK_nvOM.Pages.Home

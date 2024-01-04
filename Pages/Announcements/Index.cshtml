@@ -1,19 +1,73 @@
 ﻿@page
 @model ASAG_ILIK_nvOM.Pages.Announcements.IndexModel
 @{
-    ViewData["Title"] = "Announcements";
+    ViewData["Title"] = "İlanlar";
 }
 
-<div class="text-center">
-    <h1 class="display-4">İlanlar</h1>
+<div class="container row p-0 m-0">
+<h1 class="display-4">İlanlar</h1>
 
-    <!-- İlanları listeleyebilirsiniz -->
-    <ul>
-        @foreach (var announcement in Model.Announcements)
-        {
-            <li>@announcement.Title - @announcement.Description</li>
-        }
-    </ul>
-
+    <div class="col-10">
+        <h2>İlan Listesi</h2>
+    </div>
+    <div class="col-2">
+        <a asp-page="Create" class="btn btn-primary form-control text-white">Yeni İlan Kaydedin</a>
+    </div>
+    <div class="col-12 border p-3 mt-3">
+        <form method="post">
+            @if (Model.Announcements.Count() > 0)
+            {
+                <table class="table table-bordered table-striped">
+                    <thead class="table-secondary">
+                        <tr>
+                            <th class="col-1">
+                                <label asp-for="Announcements.FirstOrDefault().AnnouncementId">#</label>
+                            </th>
+                            <th class="col-3">
+                                <label asp-for="Announcements.FirstOrDefault().Title">İlan Başlığı</label>
+                            </th>
+                            <th class="col-3">
+                                <label asp-for="Announcements.FirstOrDefault().Description">Açıklama</label>
+                            </th>
+                            <th class="col-2">
+                                <label asp-for="Announcements.FirstOrDefault().PublishDate">Oluşturma Tarihi</label>
+                            </th>
+                            <th class="col-1">
+                                <label asp-for="Announcements.FirstOrDefault().Price">Ücret</label>
+                            </th>
+                            <th class="col-2"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Announcements)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(m => item.AnnouncementId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => item.Title)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => item.Description)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => item.PublishDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => item.Price)
+                                </td>
+                                <td>
+                                    <button asp-page-handler="Delete" asp-route-id="@item.AnnouncementId" onclick="return confirm('Araç bilgilerini silmek istediğinizden emin misiniz?')" class="btn btn-danger btn-sm">Sil</button>
+                                    <a asp-page="Edit" asp-route-id="@item.AnnouncementId" class="btn btn-success btn-sm">Düzenle</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </form>
+    </div>
     <p><a asp-page="/Home/Index">Ana Sayfa'ya Geri Dön</a></p>
 </div>
+

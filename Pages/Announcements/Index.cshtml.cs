@@ -2,25 +2,37 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using ASAG_ILIK_nvOM.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ASAG_ILIK_nvOM.Pages.Announcements
 {
     public class IndexModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _db;
 
-        public IndexModel(ApplicationDbContext context)
+        public IndexModel(ApplicationDbContext db)
         {
-            _context = context;
+            _db = db;
         }
 
-        public async Task OnGetAsync()
+        public IEnumerable<AnnouncementModel> Announcements { get; set; }
+
+        public async Task OnGet()
         {
-            // Ýlanlarý veritabanýndan çekerek Model.Announcements üzerine atama yapabilirsiniz
-            Announcements = await _context.Announcements.ToListAsync();
+            Announcements = await _db.Announcements.ToListAsync();
         }
 
-        // Model üzerinde kullanýlacak property'leri tanýmlayabilirsiniz
-        public List<AnnouncementModel> Announcements { get; set; }
+        public async Task<IActionResult> OnPostDelete(int id)
+        {
+            var announcement = await _db.Announcements.FindAsync(id);
+            if (announcement == null)
+            {
+                return NotFound();
+            }
+            _db.Announcements.Remove(announcement);
+            await _db.SaveChangesAsync();
+
+            return RedirectToPage("Index");
+        }
     }
 }

@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ASAG_ILIK_nvOM.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ASAG_ILIK_nvOM.Pages.Login
 {
+
     public class IndexModel : PageModel
     {
         private readonly ApplicationDbContext _context;
@@ -18,6 +20,7 @@ namespace ASAG_ILIK_nvOM.Pages.Login
             _context = context;
         }
 
+        [Authorize]
         public IActionResult OnPost()
         {
             // Kullanýcýyý veritabanýnda kontrol et (örneðin sadece kullanýcý adý kontrolü yapýlýyor)

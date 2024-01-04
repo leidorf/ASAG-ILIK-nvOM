@@ -15,14 +15,12 @@ public class ApplicationDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<AnnouncementModel>()
-            .Property(a => a.Balance)
-            .HasColumnType("decimal(18,2)"); // Bu örnek varsayılan precision ve scale değerleridir, ihtiyacınıza göre düzenleyebilirsiniz
+            .Property(a => a.Price)
+            .HasColumnType("decimal(18, 2)");
 
-        // İlişkileri tanımlayabilirsiniz
-        modelBuilder.Entity<AnnouncementModel>()
-            .HasOne(a => a.User)
-            .WithMany(u => u.Announcements)
-            .HasForeignKey(a => a.UserId)
-            .OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<UserModel>()
+            .Property(u => u.Balance)
+            .HasColumnType("decimal(18, 2)");
     }
+
 }
