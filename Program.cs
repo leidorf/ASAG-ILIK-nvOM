@@ -10,6 +10,10 @@ var configuration = builder.Configuration;
 var connectionString = configuration.GetConnectionString("DefaultConnection");
 
 // Add services to the container.
+builder.Services.AddScoped<AnnouncementService>();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSession();
+builder.Services.AddMvc();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddRazorPages();
 builder.Services.AddDistributedMemoryCache();

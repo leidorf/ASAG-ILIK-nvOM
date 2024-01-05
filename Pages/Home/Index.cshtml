@@ -1,14 +1,24 @@
 ﻿@page
 @model ASAG_ILIK_nvOM.Pages.Home.IndexModel
 @{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "Ana Sayfa";
 }
-
+@{
+    string userName = HttpContext.Session.GetString("Username");
+    int? balance = HttpContext.Session.GetInt32("Balance");
+    string isEmployerStr = HttpContext.Session.GetString("IsEmployer");
+    bool isEmployer = bool.Parse(isEmployerStr);
+}
 <div class="text-center">
-    <h1 class="display-4">Hoşgeldiniz!</h1>
+    <h1 class="display-4">Hoşgeldiniz, @userName!</h1>
 
     <p>Kullanıcı sayfanıza hoş geldiniz. İşlemlerinizi buradan gerçekleştirebilirsiniz.</p>
+    <br />
+    <p>Bakiyeniz: @balance TL</p>
 
+    @if(isEmployer){
+        <a asp-page="Deposit" class="btn btn-warning">Bakiye Yükle</a>
+    }
     <!-- İlanları görüntüleme veya başka seçenekler ekleyebilirsiniz -->
     <a asp-page="/Announcements/Index" class="btn btn-success">İlanları Görüntüle</a>
 </div>

@@ -1,0 +1,21 @@
+﻿@page
+@model ASAG_ILIK_nvOM.Pages.Home.DepositModel
+@{
+    ViewData["Title"] = "Bakiye Yükleme";
+}
+<div class="container">
+    <h1 class="display-4">Bakiye Yükleme</h1>
+    <br />
+
+    <form method="post">
+        <div class="form-group col-4">
+            <label for="amount">Yüklenecek Miktar:</label>
+            <input type="number" class="form-control" id="amount" min="0" name="amount" required />
+        </div>
+        <br />
+        <button type="submit" class="btn btn-success">Bakiye Yükle</button>
+    </form>
+
+    <br />
+    <p><a asp-page="/Home/Index">Ana Sayfa'ya Geri Dön</a></p>
+</div>

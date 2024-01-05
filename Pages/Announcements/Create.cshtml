@@ -1,7 +1,10 @@
 ﻿@page
 @model ASAG_ILIK_nvOM.Pages.Announcements.CreateModel
 @{
+    ViewData["Title"] = "İlan Kaydet";
+
 }
+
 <br />
 <h2 class="text-info">Yeni İlan Kaydet</h2>
 <br />
@@ -25,8 +28,6 @@
                 <input asp-for="Announcements.Description" class="form-control" />
             </div>
             <span asp-validation-for="Announcements.Description" class="text-danger"></span>
-
-
             <div class="col-7">
                 <label asp-for="Announcements.Price">İlan Fiyatı</label>
             </div>

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
-
+/*
 namespace ASAG_ILIK_nvOM.Controllers
 {
     public class AnnouncementController : Controller
@@ -143,3 +143,4 @@ namespace ASAG_ILIK_nvOM.Controllers
     }
 
 }
+*/

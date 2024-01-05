@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using ASAG_ILIK_nvOM.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using System.ComponentModel;
 
 namespace ASAG_ILIK_nvOM.Pages.Login
 {
@@ -20,7 +21,6 @@ namespace ASAG_ILIK_nvOM.Pages.Login
             _context = context;
         }
 
-        [Authorize]
         public IActionResult OnPost()
         {
             // Kullanýcýyý veritabanýnda kontrol et (örneðin sadece kullanýcý adý kontrolü yapýlýyor)
@@ -28,7 +28,16 @@ namespace ASAG_ILIK_nvOM.Pages.Login
 
             if (user != null && user.Password == UserModel.Password)
             {
+                string userName = user.Username;
+                int userId = user.UserId;
+                decimal balance = user.Balance;
+                bool isEmployer = user.IsEmployer;
 
+                HttpContext.Session.SetInt32("UserId", userId);
+                HttpContext.Session.SetString("IsEmployer", isEmployer.ToString());
+                HttpContext.Session.SetString("Username", userName);
+                HttpContext.Session.SetInt32("Balance", (int)balance);
+                
                 return RedirectToPage("/Home/Index");
             }
 

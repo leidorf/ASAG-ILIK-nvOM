@@ -9,12 +9,12 @@ namespace ASAG_ILIK_nvOM.Pages.Announcements
     public class IndexModel : PageModel
     {
         private readonly ApplicationDbContext _db;
-
+        [BindProperty]
+        public UserModel UserModel { get; set; }
         public IndexModel(ApplicationDbContext db)
         {
             _db = db;
         }
-
         public IEnumerable<AnnouncementModel> Announcements { get; set; }
 
         public async Task OnGet()

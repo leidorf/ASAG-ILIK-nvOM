@@ -1,0 +1,47 @@
+﻿@page
+@model ASAG_ILIK_nvOM.Pages.Announcements.DetailsModel
+@{
+    ViewData["Title"] = "İlan Detayları";
+}
+
+<div class="container">
+    <h1 class="display-4">İlan Detayları</h1>
+    <br />
+    <div>
+        <!-- İlan Detayları-->
+        <dl class="row">
+            <dt class="col-sm-3">Başlık:</dt>
+            <dd class="col-sm-9">@Model.Announcement.Title</dd>
+
+            <dt class="col-sm-3">Açıklama:</dt>
+            <dd class="col-sm-9">@Model.Announcement.Description</dd>
+
+            <dt class="col-sm-3">Fiyat:</dt>
+            <dd class="col-sm-9">@Model.Announcement.Price<span> TL</span></dd>
+
+            <dt class="col-sm-3">Aktiflik Durumu:</dt>
+            <dd class="col-sm-9">@Model.Announcement.IsActive</dd>
+        </dl>
+
+        <div class=" row">
+            <!-- İlanı Onaylama Formu -->
+            <div class="col-3">
+                <form method="post" asp-page-handler="Accept" asp-route-id="@Model.Announcement.AnnouncementId">
+                    <input type="hidden" asp-for="Announcement.IsActive" />
+
+                    <button type="submit" class="btn btn-primary">İlanı Kabul Et</button>
+                </form>
+            </div>
+
+            <!-- İlanı Tamamla Formu -->
+            <div class="col-3">
+                <form method="post" asp-page-handler="Complete" asp-route-id="@Model.Announcement.AnnouncementId">
+                    <button type="submit" class="btn btn-success">İlanı Tamamla</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <p><a asp-page="/Home/Index">Ana Sayfa'ya Geri Dön</a></p>
+</div>

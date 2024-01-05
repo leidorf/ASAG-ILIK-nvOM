@@ -4,16 +4,27 @@
     ViewData["Title"] = "İlanlar";
 }
 
+@{
+    int? userId = HttpContext.Session.GetInt32("UserId");
+    string isEmployerStr = HttpContext.Session.GetString("IsEmployer");
+    bool isEmployer = bool.Parse(isEmployerStr);
+}
+
 <div class="container row p-0 m-0">
-<h1 class="display-4">İlanlar</h1>
+    <h1 class="display-4">İlanlar</h1>
 
     <div class="col-10">
         <h2>İlan Listesi</h2>
     </div>
     <div class="col-2">
-        <a asp-page="Create" class="btn btn-primary form-control text-white">Yeni İlan Kaydedin</a>
+        @if (isEmployer)
+        {
+            <a asp-page="Create" class="btn btn-primary form-control text-white">Yeni İlan Kaydedin</a>
+        }
+
     </div>
     <div class="col-12 border p-3 mt-3">
+
         <form method="post">
             @if (Model.Announcements.Count() > 0)
             {
@@ -55,12 +66,29 @@
                                     @Html.DisplayFor(m => item.PublishDate)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(m => item.Price)
+                                    @Html.DisplayFor(m => item.Price) <span> TL</span>
                                 </td>
-                                <td>
-                                    <button asp-page-handler="Delete" asp-route-id="@item.AnnouncementId" onclick="return confirm('Araç bilgilerini silmek istediğinizden emin misiniz?')" class="btn btn-danger btn-sm">Sil</button>
-                                    <a asp-page="Edit" asp-route-id="@item.AnnouncementId" class="btn btn-success btn-sm">Düzenle</a>
-                                </td>
+                                @if (isEmployer)
+                                {
+                                    <td>
+
+                                        <button asp-page-handler="Delete" asp-route-id="@item.AnnouncementId" onclick="return confirm('Araç bilgilerini silmek istediğinizden emin misiniz?')" class="btn btn-danger btn-sm">Sil</button>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        @if (item.AcceptedByUserId==0 || userId == item.AcceptedByUserId)
+                                        {
+                                            <a asp-page="Details" asp-route-id="@item.AnnouncementId" class="btn btn-success btn-sm">Detaylar</a>
+                                        }
+                                        else
+                                        {
+                                            <span>Bu ilan başkası tarafından kabul edilmiştir.</span>
+                                        }
+
+                                    </td>
+                                }
                             </tr>
                         }
                     </tbody>
